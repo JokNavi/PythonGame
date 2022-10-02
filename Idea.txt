@@ -1,7 +1,6 @@
-
 Guide:
   Normal difficulty:
-    Number game. you're given a set number of operations to spend. These act as your moves. 
+    Number game. you're given a set number of (possibly duplicate) operations to spend. These act as your moves. 
     (A possible time limit can be inserted for this game if needed.)
     You'll get given a max count number. If you exceed this number you lose.
     You also have to be under 0 before all your operations are used.
@@ -10,6 +9,9 @@ Guide:
     To start; you pick a number from 0 to 9. 
     You win if your position under 0 when all your operations/moves have been completed.
     The prestige of the game comes from who got the highest score but still ended safe before using all their moves.
+    You play by doing: {your number} operation {your number}.
+    This number then turns into your new number.
+    After using an operation you've used that specific operation.
 
   Master difficulty
     Basically thesame game. except that you start with last round's ending position.
