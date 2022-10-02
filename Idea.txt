@@ -9,6 +9,7 @@ Guide:
 
     To start; you pick a number from 0 to 9. 
     You win if your position under 0 when all your operations/moves have been completed.
+    The prestige of the game comes from who got the highest score but still ended safe before using all their moves.
 
   Master difficulty
     Basically thesame game. except that you start with last round's ending position.
