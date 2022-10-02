@@ -1,0 +1,20 @@
+
+Guide:
+  Normal difficulty:
+    Number game. you're given a set number of operations to spend. These act as your moves. 
+    (A possible time limit can be inserted for this game if needed.)
+    You'll get given a max count number. If you exceed this number you lose.
+    You also have to be under 0 before all your operations are used.
+    If you don't you lose that round. 
+
+    To start; you pick a number from 0 to 9. 
+    You win if your position under 0 when all your operations/moves have been completed.
+
+  Master difficulty
+    Basically thesame game. except that you start with last round's ending position.
+    If you end on a number ending on ,5 with one of your moves; You can keep it.
+    
+    
+-Int only for main gamemode
+-Sloped loading bar from bottom left (negative max count number) to top right (positive max count number)
+-Loading bar updates depending on your current position.
