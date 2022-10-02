@@ -1,9 +1,22 @@
 Settings:
+  Operators:
     ^  0.1000
     *  0.1500
     /  0.1500
     +  0.3000
     -  0.3000
+
+  Accepted numbers:
+    0
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
 
 Guide:
   Normal difficulty:
