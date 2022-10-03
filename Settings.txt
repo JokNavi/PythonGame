@@ -24,6 +24,9 @@ Settings:
       10  0.300
       13  0.200
       15  0.150
+    
+    Burn height:
+      250
 
   Master level:
 
