@@ -1,13 +1,9 @@
 Settings:
   Operators:
-    ^  0.1000
-    *  0.1500
-    /  0.1500
-    +  0.3000
-    -  0.3000
+    * or / 0.500
+    + or - 0.500
 
   Accepted numbers:
-    0
     1
     2
     3
@@ -17,6 +13,12 @@ Settings:
     7
     8
     9
+
+  Master level:
+    ^  0.1000
+
+  Game mode:
+    Normal
 
 Guide:
   Normal difficulty:
@@ -34,7 +36,7 @@ Guide:
       + or -:
         Take your number's digits, and add them all up. Then, add or subtract your number with this number.
       * or /:
-        Take your number divide it by 2. Then multiply or divide your number by this number.  
+        Take the first digit of your number. Then multiply or divide your number by this number.  
 
 
   Master difficulty
