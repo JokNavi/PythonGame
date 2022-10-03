@@ -1,23 +1,24 @@
 from numpy import random
-BURN_HEIGHT = 250
-high_score = 0
+#Normal difficulty
+#  Operators:
+OPERATORS = ["*","/","+","-"]
+
 with open('Settings.txt', 'r') as s:
     settings_file = s.readlines()
 operator_chances = settings_file[settings_file.index("    Operators:\n")+1:settings_file.index("    Accepted numbers:\n")-1]
 accepted_numbers = settings_file[settings_file.index("    Accepted numbers:\n")+1:settings_file.index("    Amount of operations:\n")-1]
 game_mode = settings_file[settings_file.index("  Game mode:\n")+1:settings_file.index("Guide:\n")-1]
 game_mode = str(*game_mode).lstrip("    ").rstrip("\n")
-amount_of_operations = settings_file[settings_file.index("    Amount of operations:\n")+1:settings_file.index("  Master level:\n")-1]
+amount_of_operations = settings_file[settings_file.index("    Amount of operations:\n")+1:settings_file.index("    Burn height:\n")-1]
 amount_of_operations = [str(operation).lstrip("      ").rstrip("\n")for operation in amount_of_operations]
+burn_height = settings_file[settings_file.index("    Burn height:\n")+1:settings_file.index("  Master level:\n")-1]
+BURN_HEIGHT = [str(height).lstrip("      ").rstrip("\n")for height in burn_height][0]
 AMOUNT_OF_OPERATIONS = random.choice([value[0:2] for value in amount_of_operations], p=[value[3:8] for value in amount_of_operations], size=(1)).tolist()
-OPERATIONS = random.choice([value[6:12] for value in operator_chances], p=[value[13:18] for value in operator_chances], size=(int(AMOUNT_OF_OPERATIONS[0]))).tolist()
-operators = []
-for i in range(2):
-    operators.append(operator_chances[i][11:12])
-    operators.append(operator_chances[i][6:7])
+OPERATIONS = random.choice(OPERATORS, p=[value[13:18] for value in operator_chances], size=(int(AMOUNT_OF_OPERATIONS[0]))).tolist()
+
 accepted_numbers = [str(number).lstrip("    ").rstrip("\n")for number in accepted_numbers]
 while True:
-    print("Input your number! [0-9]")
+    print(f"Input your number! [{accepted_numbers[0]}-{accepted_numbers[-1]}]")
     number = input("->: ")
     if number in accepted_numbers:
         number = int(number)
@@ -28,12 +29,12 @@ while len(OPERATIONS) > 0:
     print(f"Burn height: {BURN_HEIGHT}")
     print(f"Your high score: {high_score}")
     print("Pick an operator: ")
-    print(f"{operators[0]} or {operators[1]}", end="")
+    print(f"{OPERATORS[0]} or {OPERATORS[1]}", end="")
     print(f"  [{ OPERATIONS.count(str(operator_chances[0][6:12]))}]")
-    print(f"{operators[2]} or {operators[3]}", end="")
+    print(f"{OPERATORS[2]} or {OPERATORS[3]}", end="")
     print(f"  [{OPERATIONS.count(str(operator_chances[1][6:12]))}]", end="\n\n")
     chosen_operator = input("->: ")
-    if chosen_operator in operators:
+    if chosen_operator in OPERATORS:
         match chosen_operator:
             case "^":
                 if game_mode == "Numbered":
@@ -53,8 +54,9 @@ while len(OPERATIONS) > 0:
                 number = int(number - sum([number]))
         if number == 0:
             number = -5
-        elif number > BURN_HEIGHT:
+        elif number > int(BURN_HEIGHT):
             print("We're sorry you lost!")
+            print(f"Your number: {number} > Burn number: {BURN_HEIGHT}")
             break
         if chosen_operator in list(str([item for item in OPERATIONS])):
             f = [value for value in OPERATIONS if chosen_operator in value]
