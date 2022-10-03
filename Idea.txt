@@ -9,10 +9,20 @@ Guide:
     To start; you pick a number from 0 to 9. 
     You win if your position under 0 when all your operations/moves have been completed.
     The prestige of the game comes from who got the highest score but still ended safe before using all their moves.
+    You play by picking an operation and using your number with it.
+    Operations:
+      + or -:
+        Take your number's digits, and add them all up. Then, add or subtract your number with this number.
+      * or /:
+        Take your number divide it by 2. Then multiply or divide your number by this number.  
+
 
   Master difficulty
     Basically thesame game. except that you start with last round's ending position.
     If you end on a number ending on ,5 with one of your moves; You can keep it.
+    Extra operations:
+      ^:
+        Take your number's first digit. and do that digit to the power of that digit. that will be your new number.
     
     
 -Int only for main gamemode
