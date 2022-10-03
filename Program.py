@@ -32,11 +32,11 @@ while len(USER_OPERATIONS) > 0:
     if [v for _,v in enumerate(USER_OPERATIONS) if chosen_operator in v]:
         match chosen_operator:
             case "*":
-                print(f"{number}*{[number][0]}")
-                number = int(number * [number][0])
+                print(f"{number}*{int(list(str(number))[0])}")
+                number = int(number * int(list(str(number))[0]))
             case "/":
-                print(f"{number}/{[number][0]}")
-                number = int(number / [number][0])
+                print(f"{number}/{int(list(str(number))[0])}")
+                number = int(number / int(list(str(number))[0]))
             case "+":
                 print(f"{number}+{sum([int(v) for v in list(str(number))])}")
                 number = int(number + sum([int(v) for v in list(str(number))]))
