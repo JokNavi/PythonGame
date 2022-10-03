@@ -3,16 +3,17 @@ from numpy import random
 #  Operators:
 OPERATORS = ['* or /', '+ or -']
 OPERATORS_CHANCES = [0.5, 0.5]
-AMOUNT_OF_OPERATIONS = [10, 13, 15, 18, 21]
+AMOUNT_OF_OPERATIONS = [15, 18, 21, 24, 27]
 AMOUNT_OF_OPERATIONS_CHANCES = [0.15, 0.2, 0.3, 0.2, 0.15]
 AMOUNT_OF_OPERATIONS = random.choice(AMOUNT_OF_OPERATIONS, p=AMOUNT_OF_OPERATIONS_CHANCES, size=(1)).tolist()
 USER_OPERATIONS = random.choice(OPERATORS, p=OPERATORS_CHANCES, size=(AMOUNT_OF_OPERATIONS)).tolist()
 #  Game settings:
-BURN_HEIGHT = int(random.uniform(low=1000, high=10000, size=(1)))
+BURN_HEIGHT = int(random.uniform(low=800, high=3300, size=(1)))
 GAME_MODE = 'Normal'
 ACCEPTED_NUMBERS = [str(i) for i in range(10) if i != 0]
 # INIT:
 high_score = "0"
+amount_of_moves = 0
 while True:
     print(f"Input your number! [{ACCEPTED_NUMBERS[0]}-{ACCEPTED_NUMBERS[-1]}]")
     number = input("->: ")
@@ -34,20 +35,27 @@ while len(USER_OPERATIONS) > 0:
             case "*":
                 print(f"{number}*{int(list(str(number))[0])}")
                 number = int(number * int(list(str(number))[0]))
+                amount_of_moves = amount_of_moves+1
             case "/":
                 print(f"{number}/{int(list(str(number))[0])}")
                 number = int(number / int(list(str(number))[0]))
+                amount_of_moves = amount_of_moves+1
             case "+":
                 print(f"{number}+{sum([int(v) for v in list(str(number))])}")
                 number = int(number + sum([int(v) for v in list(str(number))]))
+                amount_of_moves = amount_of_moves+1
             case "-":
                 print(f"{number}-{sum([int(v) for v in list(str(number))])}")
                 number = int(number - sum([int(v) for v in list(str(number))]))
+                amount_of_moves = amount_of_moves+1
         if (number == 0): number = 5
         elif (number > int(high_score)): high_score = str(number)
         if (number > BURN_HEIGHT): 
             print("We're sorry you lost!")
             print(f"Your number: {number}, is larger then burn number: {BURN_HEIGHT}")
+            with open('HighScores.txt', "a") as f:
+                f.write(f"High score: *\n")
+                f.write(f" -Amount of moves: {amount_of_moves}\n")
             break
         operator_quantity_check = str([v for _,v in enumerate(USER_OPERATIONS) if chosen_operator in v][0])
         if(operator_quantity_check): #remove used operation
@@ -58,11 +66,12 @@ while len(USER_OPERATIONS) > 0:
             print(f"You win! Your high score was: {high_score}") 
             with open('HighScores.txt', "a") as f:
                 f.write(f"High score: {high_score}\n")
+                f.write(f" -Amount of moves: {amount_of_moves}\n")
         elif len(USER_OPERATIONS) <= 0:
             print(f"Your number: {number}")
             print("We're sorry you lost!")
             with open('HighScores.txt', "a") as f:
-                f.write(f"High score: *\n")
-        
+                f.write(f"High score: F\n")
+                f.write(f" -Amount of moves: {amount_of_moves}\n")
     else:
         print("Invalid operator. Please choose another one.")
