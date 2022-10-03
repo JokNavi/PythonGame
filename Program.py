@@ -8,7 +8,7 @@ AMOUNT_OF_OPERATIONS_CHANCES = [0.15, 0.2, 0.3, 0.2, 0.15]
 AMOUNT_OF_OPERATIONS = random.choice(AMOUNT_OF_OPERATIONS, p=AMOUNT_OF_OPERATIONS_CHANCES, size=(1)).tolist()
 USER_OPERATIONS = random.choice(OPERATORS, p=OPERATORS_CHANCES, size=(AMOUNT_OF_OPERATIONS)).tolist()
 #  Game settings:
-BURN_HEIGHT = int(random.uniform(low=4500, high=5500, size=(1)))
+BURN_HEIGHT = int(random.uniform(low=1000, high=10000, size=(1)))
 GAME_MODE = 'Normal'
 ACCEPTED_NUMBERS = [str(i) for i in range(10) if i != 0]
 # INIT:
