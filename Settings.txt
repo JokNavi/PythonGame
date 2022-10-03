@@ -1,6 +1,8 @@
-Settings:
+(DO NOT TOUCH)
+
+Settings: 
   Normal level:
-  
+
     Operators:
       * or / 0.500
       + or - 0.500
@@ -15,6 +17,13 @@ Settings:
       7
       8
       9
+
+    Amount of operations:
+      5   0.150
+      8   0.200
+      10  0.300
+      13  0.200
+      15  0.150
 
   Master level:
 
