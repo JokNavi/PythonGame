@@ -1,7 +1,27 @@
 Settings:
-  Operators:
-    * or / 0.500
-    + or - 0.500
+  Normal level:
+  
+    Operators:
+      * or / 0.500
+      + or - 0.500
+
+    Accepted numbers:
+      1
+      2
+      3
+      4
+      5
+      6
+      7
+      8
+      9
+
+  Master level:
+
+    Operators:
+    ^ or ^ 0.100
+    * or / 0.400
+    + or - 0.400
 
   Accepted numbers:
     1
@@ -13,9 +33,6 @@ Settings:
     7
     8
     9
-
-  Master level:
-    ^  0.1000
 
   Game mode:
     Normal
