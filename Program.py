@@ -3,17 +3,16 @@ from numpy import random
 #  Operators:
 OPERATORS = ['* or /', '+ or -']
 OPERATORS_CHANCES = [0.5, 0.5]
-AMOUNT_OF_OPERATIONS = [5, 8, 10, 13, 15]
+AMOUNT_OF_OPERATIONS = [10, 13, 15, 18, 21]
 AMOUNT_OF_OPERATIONS_CHANCES = [0.15, 0.2, 0.3, 0.2, 0.15]
 AMOUNT_OF_OPERATIONS = random.choice(AMOUNT_OF_OPERATIONS, p=AMOUNT_OF_OPERATIONS_CHANCES, size=(1)).tolist()
 USER_OPERATIONS = random.choice(OPERATORS, p=OPERATORS_CHANCES, size=(AMOUNT_OF_OPERATIONS)).tolist()
 #  Game settings:
-BURN_HEIGHT = 250
+BURN_HEIGHT = 3000
 GAME_MODE = 'Normal'
 ACCEPTED_NUMBERS = [str(i) for i in range(10) if i != 0]
 # INIT:
 high_score = 0
-
 while True:
     print(f"Input your number! [{ACCEPTED_NUMBERS[0]}-{ACCEPTED_NUMBERS[-1]}]")
     number = input("->: ")
@@ -39,11 +38,11 @@ while len(USER_OPERATIONS) > 0:
                 print(f"{number}/{[number][0]}")
                 number = int(number / [number][0])
             case "+":
-                print(f"{number}+{sum([number])}")
-                number = int(number + sum([number]))
+                print(f"{number}+{sum([int(v) for v in list(str(number))])}")
+                number = int(number + sum([int(v) for v in list(str(number))]))
             case "-":
-                print(f"{number}-{sum([number])}")
-                number = int(number - sum([number]))
+                print(f"{number}-{sum([int(v) for v in list(str(number))])}")
+                number = int(number - sum([int(v) for v in list(str(number))]))
         if (number == 0): number = 5
         elif (number > high_score): high_score = number
         if (number > BURN_HEIGHT): 
