@@ -3,12 +3,12 @@ import random
 # Operators:
 OPERATORS = ['* or /', '+ or -']
 OPERATORS_CHANCES = [0.5, 0.5]
-amount_of_operations = [15, 18, 21, 24, 27]
+amount_of_operations = [21, 25, 28, 32, 35]
 AMOUNT_OF_OPERATIONS_CHANCES = [0.15, 0.2, 0.3, 0.2, 0.15]
 amount_of_operations = random.choices(amount_of_operations, weights=AMOUNT_OF_OPERATIONS_CHANCES, k=1)
 USER_OPERATIONS =  random.choices(OPERATORS, weights=OPERATORS_CHANCES, k=amount_of_operations[0])
 # Game settings:
-BURN_HEIGHT = random.randint(800, 3300)
+BURN_HEIGHT = random.randint(3250, 5300)
 GAME_MODE = 'Normal'
 ACCEPTED_NUMBERS = [str(i) for i in range(10) if i != 0]
 # Highscores.py:
