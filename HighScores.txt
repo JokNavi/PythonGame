@@ -1,4 +1,6 @@
-Your high scores:High score: *
- -Amount of moves: 1
+Your high scores:
+
 High score: *
- -Amount of moves: 1
+ -Amount of moves: 10
+High score: *
+ -Amount of moves: 10

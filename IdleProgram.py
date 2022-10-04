@@ -18,7 +18,7 @@ amount_of_moves = 0
 def print_output_file(high_score):
     with open('HighScores.txt', "a") as f:
         f.write(f"\nHigh score: {high_score}\n")
-        f.write(f" -Amount of moves: {amount_of_moves}\n")
+        f.write(f" -Amount of moves: {amount_of_moves}")
 
 while True:
     print(f"Input your number! [{ACCEPTED_NUMBERS[0]}-{ACCEPTED_NUMBERS[-1]}]")
@@ -40,7 +40,7 @@ while len(USER_OPERATIONS) > 0:
         number_list = []
         if number[0] == "-": 
             number_list.append(number[0:2])
-            number_list.extend([number[2:]])                    
+            number_list.extend([d for i,d in enumerate(number) if i>=2])                    
         elif len(number) > 0: number_list = number
         match chosen_operator:
             case "*":
