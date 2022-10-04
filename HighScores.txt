@@ -1,1 +1,4 @@
-Your high scores:
+Your high scores:High score: *
+ -Amount of moves: 1
+High score: *
+ -Amount of moves: 1

@@ -30,29 +30,37 @@ while len(USER_OPERATIONS) > 0:
     print("Pick an operator: ")
     print(f"{OPERATORS[0]} [{USER_OPERATIONS.count(OPERATORS[0])}x]")
     print(f"{OPERATORS[1]} [{USER_OPERATIONS.count(OPERATORS[1])}x]")
-    if number[0] == "-": prefix = "-"
+    if str(number)[0] == "-": 
+        prefix = "-"
+        number = str(number)[1:]
+    else:
+        prefix = ""
     chosen_operator = input("->: ")
     if [v for _,v in enumerate(USER_OPERATIONS) if chosen_operator in v]:
         match chosen_operator:
             case "*":
-                print(f"{number}*{int(str(number)[0])}")
-                number = int(number * int(str(number)[0]))
+                print(f"{int(number)}*{int(number[0])}")
+                number = str(int(int(number) * int(number[0])))
                 amount_of_moves = amount_of_moves+1
             case "/":
-                print(f"{number}/{int(str(number)[0])}")
-                number = int(number / int(str(number)[0]))
+                print(f"{int(number)}/{int(number[0])}")
+                number = str(int(int(number) / int(number[0])))
                 amount_of_moves = amount_of_moves+1
             case "+":
-                print(f"{number}+{sum([int(v) for v in list(str(number))])}")
-                number = int(number + sum([int(v) for v in list(str(number))]))
+                plus_operation = sum([int(v) for v in list(number)])
+                print(f"{number}+{plus_operation}")
+                if plus_operation >= int(number):
+                    number = str(int(prefix + int(number)) + plus_operation)
+                else:
+                    number = prefix + str(int(number) + plus_operation)
                 amount_of_moves = amount_of_moves+1
             case "-":
-                print(f"{number}-{sum(i for i in number)}")
-                number = int(number - sum([int(v) for v in list(str(number))]))
+                print(f"{number}-{sum(int(i) for i in number)}")
+                number = str(int(int(number) - sum([int(v) for v in list(str(number))])))
                 amount_of_moves = amount_of_moves+1
-        if (number == 0): number = -2
-        elif (number > int(high_score)): high_score = str(number)
-        if (number > BURN_HEIGHT): 
+        if (int(number) == 0): number = -2
+        elif (int(number) > int(high_score)): high_score = str(number)
+        if (int(number) > BURN_HEIGHT): 
             print("We're sorry you lost!")
             print(f"Your number: {number}, is larger then burn number: {BURN_HEIGHT}")
             with open('HighScores.txt', "a") as f:
@@ -64,7 +72,7 @@ while len(USER_OPERATIONS) > 0:
             USER_OPERATIONS.remove(operator_quantity_check)
         else:
             print(f"Nope, no more \"{chosen_operator}\" left over. sorry!")
-        if number <= 0 and len(USER_OPERATIONS) <= 0: #win condition
+        if int(number) <= 0 and len(USER_OPERATIONS) <= 0: #win condition
             print(f"You win! Your high score was: {high_score}") 
             with open('HighScores.txt', "a") as f:
                 f.write(f"High score: {high_score}\n")
