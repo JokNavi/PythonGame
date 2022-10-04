@@ -1,87 +1,80 @@
 import random
 #Normal difficulty
-#  Operators:
+# Operators:
 OPERATORS = ['* or /', '+ or -']
 OPERATORS_CHANCES = [0.5, 0.5]
 amount_of_operations = [15, 18, 21, 24, 27]
 AMOUNT_OF_OPERATIONS_CHANCES = [0.15, 0.2, 0.3, 0.2, 0.15]
 amount_of_operations = random.choices(amount_of_operations, weights=AMOUNT_OF_OPERATIONS_CHANCES, k=1)
 USER_OPERATIONS =  random.choices(OPERATORS, weights=OPERATORS_CHANCES, k=amount_of_operations[0])
-#  Game settings:
+# Game settings:
 BURN_HEIGHT = random.randint(800, 3300)
 GAME_MODE = 'Normal'
 ACCEPTED_NUMBERS = [str(i) for i in range(10) if i != 0]
-# INIT:
-high_score = "0"
+# Highscores.py:
+high_score = 0
 amount_of_moves = 0
-prefix = ""
+# Init
+def print_output_file(high_score):
+    with open('HighScores.txt', "a") as f:
+        f.write(f"High score: {high_score}\n")
+        f.write(f" -Amount of moves: {amount_of_moves}\n")
+
 while True:
     print(f"Input your number! [{ACCEPTED_NUMBERS[0]}-{ACCEPTED_NUMBERS[-1]}]")
     number = input("->: ")
     if number in ACCEPTED_NUMBERS:
-        number = number
+        print("")
         break
     print(f"Sorry. {number} is not an allowed number!\n")
     
 while len(USER_OPERATIONS) > 0:
-    print(f"\nYour number: {number}")
+    print(f"Your number: {number}")
     print(f"Burn height: {BURN_HEIGHT}")
     print(f"Your high score: {high_score}")
     print("Pick an operator: ")
     print(f"{OPERATORS[0]} [{USER_OPERATIONS.count(OPERATORS[0])}x]")
     print(f"{OPERATORS[1]} [{USER_OPERATIONS.count(OPERATORS[1])}x]")
-    if str(number)[0] == "-": 
-        prefix = "-"
-        number = str(number)[1:]
-    else:
-        prefix = ""
     chosen_operator = input("->: ")
     if [v for _,v in enumerate(USER_OPERATIONS) if chosen_operator in v]:
+        number_list = []
+        if number[0] == "-": 
+            number_list.append(number[0:2])
+            number_list.extend([d for i,d in enumerate(number) if i>=2])                    
+        elif len(number) > 0: number_list = number
         match chosen_operator:
             case "*":
-                print(f"{int(number)}*{int(number[0])}")
-                number = str(int(int(number) * int(number[0])))
-                amount_of_moves = amount_of_moves+1
+                print(f"{number} * {int(number_list[0])}")
+                number = str(int(int(number) * int(number_list[0])))
             case "/":
-                print(f"{int(number)}/{int(number[0])}")
-                number = str(int(int(number) / int(number[0])))
-                amount_of_moves = amount_of_moves+1
+                print(f"{number} / {int(number_list[0])}")
+                number = str(int(int(number) / int(number_list[0])))
             case "+":
-                plus_operation = sum([int(v) for v in list(number)])
-                print(f"{number}+{plus_operation}")
-                if plus_operation >= int(number):
-                    number = str(int(prefix + int(number)) + plus_operation)
-                else:
-                    number = prefix + str(int(number) + plus_operation)
-                amount_of_moves = amount_of_moves+1
+                print(f"{number} + {sum(int(d) for d in number_list)}")
+                number = str(int(int(number) + sum(int(d) for d in number_list)))
             case "-":
-                print(f"{number}-{sum(int(i) for i in number)}")
-                number = str(int(int(number) - sum([int(v) for v in list(str(number))])))
-                amount_of_moves = amount_of_moves+1
-        if (int(number) == 0): number = -2
-        elif (int(number) > int(high_score)): high_score = str(number)
+                print(f"{number} - {sum(int(d) for d in number_list)}")
+                number = str(int(int(number) - sum(int(d) for d in number_list)))
+        if number == "0": number = "-5"
+        if int(number) > high_score: high_score = int(number)
+        operator_quantity_check = [v for _,v in enumerate(USER_OPERATIONS) if chosen_operator in v]
+        if(operator_quantity_check): #remove used operation
+            USER_OPERATIONS.remove(operator_quantity_check[0])
+        else:
+            print(f"Nope, no more \"{chosen_operator}\" left over. sorry!")
         if (int(number) > BURN_HEIGHT): 
             print("We're sorry you lost!")
             print(f"Your number: {number}, is larger then burn number: {BURN_HEIGHT}")
-            with open('HighScores.txt', "a") as f:
-                f.write(f"High score: *\n")
-                f.write(f" -Amount of moves: {amount_of_moves}\n")
+            print_output_file("*")
             break
-        operator_quantity_check = str([v for _,v in enumerate(USER_OPERATIONS) if chosen_operator in v][0])
-        if(operator_quantity_check): #remove used operation
-            USER_OPERATIONS.remove(operator_quantity_check)
-        else:
-            print(f"Nope, no more \"{chosen_operator}\" left over. sorry!")
-        if int(number) <= 0 and len(USER_OPERATIONS) <= 0: #win condition
+        elif int(number) <= 0 and len(USER_OPERATIONS) <= 0: #win condition
             print(f"You win! Your high score was: {high_score}") 
-            with open('HighScores.txt', "a") as f:
-                f.write(f"High score: {high_score}\n")
-                f.write(f" -Amount of moves: {amount_of_moves}\n")
+            print_output_file(high_score)
+            break
         elif len(USER_OPERATIONS) <= 0:
             print(f"Your number: {number}")
             print("We're sorry you lost!")
-            with open('HighScores.txt', "a") as f:
-                f.write(f"High score: F\n")
-                f.write(f" -Amount of moves: {amount_of_moves}\n")
+            print_output_file("F")
+            break
     else:
         print("Invalid operator. Please choose another one.")
