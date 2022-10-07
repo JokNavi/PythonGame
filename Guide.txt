@@ -11,10 +11,10 @@ Guide:
     The prestige of the game comes from who got the highest score but still ended safe before using all their moves.
     You play by picking an operation and using your number with it.
     Operations:
-      + or -:
-        Take your number's digits, and add them all up. Then, add or subtract your number with this number.
       * or /:
         Take the first digit of your number. Then multiply or divide your number by this number.  
+      + or -:
+        Take your number's digits, and add them all up. Then, add or subtract your number with this number.
 
 
   Master difficulty

@@ -4,3 +4,7 @@ High score: *
  -Amount of moves: 10
 High score: *
  -Amount of moves: 10
+High score: F
+ -Amount of moves: 0
+High score: F
+ -Amount of moves: 0

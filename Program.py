@@ -3,12 +3,12 @@ import random
 # Operators:
 OPERATORS = ['* or /', '+ or -']
 OPERATORS_CHANCES = [0.5, 0.5]
-amount_of_operations = [21, 25, 28, 32, 35]
+amount_of_operations = [15, 18, 21, 24, 27]
 AMOUNT_OF_OPERATIONS_CHANCES = [0.15, 0.2, 0.3, 0.2, 0.15]
 amount_of_operations = random.choices(amount_of_operations, weights=AMOUNT_OF_OPERATIONS_CHANCES, k=1)
 USER_OPERATIONS =  random.choices(OPERATORS, weights=OPERATORS_CHANCES, k=amount_of_operations[0])
 # Game settings:
-BURN_HEIGHT = random.randint(3250, 5300)
+BURN_HEIGHT = random.randint(800, 3300)
 GAME_MODE = 'Normal'
 ACCEPTED_NUMBERS = [str(i) for i in range(10) if i != 0]
 # Highscores.py:
@@ -17,7 +17,7 @@ amount_of_moves = 0
 # Init
 def print_output_file(high_score):
     with open('HighScores.txt', "a") as f:
-        f.write(f"\nHigh score: {high_score}\n")
+        f.write(f"High score: {high_score}\n")
         f.write(f" -Amount of moves: {amount_of_moves}\n")
 
 while True:
@@ -40,7 +40,7 @@ while len(USER_OPERATIONS) > 0:
         number_list = []
         if number[0] == "-": 
             number_list.append(number[0:2])
-            number_list.extend([number[2:]])                    
+            number_list.extend([d for i,d in enumerate(number) if i>=2])                    
         elif len(number) > 0: number_list = number
         match chosen_operator:
             case "*":
